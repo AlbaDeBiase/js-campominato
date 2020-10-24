@@ -18,37 +18,55 @@
 //
 // soluzione 1 con ciclo while
 var listaMine = [];
-var leMiePosizioni
-while(listaMine.length < 16){
-var minaRandom = getRndInteger(1,100);
+var leMiePosizioni=[];
+var numBombe = 16;
+var maxBombe = 100;
+var maxPoint = maxBombe - numBombe;
+
+
+while(listaMine.length < numBombe){
+var minaRandom = getRndInteger(1,maxBombe);
 if (listaMine.includes(minaRandom) == false) {
     listaMine.push(minaRandom);
 // ripeto 16 volte
     }
 }
-var isBombaTrovata= false;
+console.log("lista mine:" , listaMine)
+
+var isBombaTrovata = false;
+
 do {
 
-var laMiaScelta = parseInt(prompt("inserisci un numero"))
+var laMiaScelta = parseInt(prompt("inserisci un numero"));
+
+var isGameOver = isUnaMina(laMiaScelta,listaMine );
 
 
-if (listaMine.includes(laMiaScelta) == true){
+if (isGameOver == true){
 isBombaTrovata = true;
-alert("you lose");
+alert("you lose, il tuo punteggio è" + leMiePosizioni.length + "punti");
 } else if (leMiePosizioni.includes(laMiaScelta) == false){
-
+leMiePosizioni.push(laMiaScelta);
 }
 else {
 alert("duplicato");
-
+}
 }while (isBombaTrovata == false && leMiePosizioni.length < maxPoint);
 console.log(laMiaScelta);
 if (leMiePosizioni.length == maxPoint) {
-alert (hai vinto);
+alert ("you win, il tuo punteggio è" + leMiePosizioni + "punti");
+}
+
+function isUnaMina (sceltaUtente , arrayMine){
+var controllo = false;
+if (arrayMine.includes(sceltaUtente) == true){
+controllo=true;
+}
+return controllo;
 }
 
 function getRndInteger(min,max) {
-return Math.floor(Math.random()* (max - min + 1)) + min;
+return Math.floor(Math.random() * (max - min + 1)) + min;
 
 }
 
