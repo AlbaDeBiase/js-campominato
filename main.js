@@ -25,48 +25,62 @@ var maxPoint = maxBombe - numBombe;
 
 
 while(listaMine.length < numBombe){
-var minaRandom = getRndInteger(1,maxBombe);
-if (listaMine.includes(minaRandom) == false) {
-    listaMine.push(minaRandom);
+    var minaRandom = getRndInteger(1,maxBombe);
+    if (listaMine.includes(minaRandom) == false) {
+        listaMine.push(minaRandom);
 // ripeto 16 volte
     }
 }
+
 console.log("lista mine:" , listaMine)
 
 var isBombaTrovata = false;
 
 do {
 
-var laMiaScelta = parseInt(prompt("inserisci un numero"));
+    var laMiaScelta = parseInt(prompt("inserisci un numero"));
 
-var isGameOver = isUnaMina(laMiaScelta,listaMine );
+    var isGameOver = isUnaMina(laMiaScelta,listaMine );
 
 
-if (isGameOver == true){
-isBombaTrovata = true;
-alert("you lose, il tuo punteggio è" + leMiePosizioni.length + "punti");
-} else if (leMiePosizioni.includes(laMiaScelta) == false){
-leMiePosizioni.push(laMiaScelta);
-}
-else {
-alert("duplicato");
-}
-}while (isBombaTrovata == false && leMiePosizioni.length < maxPoint);
+    if (isGameOver == true) {
+
+        isBombaTrovata = true;
+        alert("you lose, il tuo punteggio è" + leMiePosizioni.length + "punti");
+
+    } else if (leMiePosizioni.includes(laMiaScelta) == false){
+      leMiePosizioni.push(laMiaScelta);
+
+    } else {
+
+        alert("duplicato");
+    }
+
+} while (isBombaTrovata == false && leMiePosizioni.length < maxPoint);
+
 console.log(laMiaScelta);
+
 if (leMiePosizioni.length == maxPoint) {
+
 alert ("you win, il tuo punteggio è" + leMiePosizioni + "punti");
+
 }
 
 function isUnaMina (sceltaUtente , arrayMine){
-var controllo = false;
-if (arrayMine.includes(sceltaUtente) == true){
-controllo=true;
-}
-return controllo;
+
+    var controllo = false;
+
+    if (arrayMine.includes(sceltaUtente) == true){
+    controllo=true;
+
+    }
+
+    return controllo;
+
 }
 
 function getRndInteger(min,max) {
-return Math.floor(Math.random() * (max - min + 1)) + min;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 
 }
 
